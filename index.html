@@ -367,8 +367,7 @@
 
       
         
-          
-            <h1 id="Gitlab"><a href="#Gitlab" class="headerlink" title="Gitlab"></a>Gitlab</h1><p>　　由于公司现在 <strong>Git</strong> 私有服务使用的是 <strong>Gitblit</strong> ，虽然只有我们一个项目组在用 <strong>Git</strong> ，但使用下来问题不断，基本有以下几点：</p>
+          <h1 id="Gitlab"><a href="#Gitlab" class="headerlink" title="Gitlab"></a>Gitlab</h1><p>　　由于公司现在 <strong>Git</strong> 私有服务使用的是 <strong>Gitblit</strong> ，虽然只有我们一个项目组在用 <strong>Git</strong> ，但使用下来问题不断，基本有以下几点：</p>
 <ol>
 <li>团队成员对 <strong>Git</strong> 的使用不熟悉，目前只有我一个人长期使用 <strong>GitHub</strong> 、 <strong>Coding</strong> 等服务。</li>
 <li>缺少 <strong>Git</strong> 工作流程的规范化。</li>
@@ -377,34 +376,14 @@
 <blockquote>
 <p>对于第一点，引入 <strong>SourceTree</strong> 可以解决大部分问题，在操作上使用图形界面相对于 <strong>Bash</strong> 上敲命令容易的多。</p>
 <p>对于第二点，起先打算引入 <strong>Git Flow</strong> 工作流，然而相对来说还是较为复杂，成员不一定能够理解其中奥妙。</p>
-<p>对于第三点，如果使用 <strong>Git Flow</strong> 工作流的话实现不了强制性代码评审，直到后来看到了 <strong>Gitlab</strong> 。</p>
-</blockquote>
-<p>　　基于以上几点，我在 Ubuntu 16.04 安装了 <strong>Gitlab</strong> ，具体安装过程我就不详述了，有兴趣的请点以下链接前往官网： <a href="https://gitlab.com/" target="_blank" rel="external">点我去官网</a> 使用过程中遇到了一个问题，在进入管理员页面时经常会出现 <strong>502</strong> 错误。详细排查之后才发现是内存不足的原因。</p>
-<p><a href="https://jjandxa.github.io/images/20160714gitlab502.png" target="_blank" rel="external"><img src="/images/20160714gitlab502.png" alt="gitlab502"></a></p>
-<p>试用过后认为有些优点是比较值得说的：</p>
-<ol>
-<li>界面美观<br><a href="https://jjandxa.github.io/images/20160714gitlabindex.png" target="_blank" rel="external"><img src="/images/20160714gitlabindex.png" alt="gitlabindex"></a></li>
-<li><strong>Gitlab Flow</strong><br>类似于 <strong>Github Flow</strong> 的工作流，就问你怕没？<br><strong>master</strong> 分支作为保护分支，只有项目拥有者可以直接操作，成员只能在 <strong>master</strong> 基础上创建功能分支，开发完成后，提交 <strong>Merge Request</strong> ，项目拥有者同意后才能合并代码。</li>
-<li>强制性代码评审<br>由上一条带来的好处就是， <strong>Mereg Request</strong> 时，项目拥有者可以和其他成员一起评审代码，对代码进行评论，在此期间，成员可以继续提交代码， <strong>Merge Request</strong> 会自动跟踪最新代码的情况。</li>
-<li><strong>Gitlab CI</strong> 集成<br>暂时没用到，就不深入讨论了</li>
-</ol>
-<p>具体而言， <strong>Gitlab</strong> 足够强大，然而问题来了，公司现在代码服务器在内网，系统为 <strong>Windows Server 2008</strong> ，而 <strong>Gitlab</strong> 只支持 Linux ，无奈只能等新服务器再使用 <strong>Gitlab</strong> 。</p>
-<blockquote>
-<p>你以为这样就结束了？</p>
-</blockquote>
-<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p>并没有，我在 Ubuntu 16.04 上安装了 <strong>Gitlab</strong> 后，想起对服务器来说，系统上装了很多服务，维护时总是在解决各种服务的冲突，另外服务不支持快速部署，对移植不友好等等。<br>由此我想到了 <strong>Docker</strong> ，在恶补了一两天，熟悉 <strong>Docker</strong> 基本使用后，便着手在 <strong>Docker</strong> 上部署 <strong>Gitlab</strong> ，由于在 <strong>Docker</strong> 上已经有成熟的 <strong>Gitlab</strong> 镜像，我们直接拿来用就可以了。<a href="https://www.damagehead.com/docker-gitlab/" target="_blank" rel="external">Docker-Gitlab</a> 在官网可以看到，部署方式特别简单，以下指出几点关键的地方：</p>
-<p><strong>docker-compose</strong><br>作为一个将容器部署从复杂变为简单的工具，我一开始是不知道的，从 <strong>Docker</strong> 官网我们可以看到以下这两条安装命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ curl -L https://github.com/docker/compose/releases/download/1.6.2/run.sh &gt; /usr/local/bin/docker-compose</div><div class="line">$ chmod +x /usr/local/bin/docker-compose</div></pre></td></tr></table></figure>
-<p>比较坑的是，国内运行这条命令来安装的速度，慢如乌龟。我一天都没下好，所以建议大家使用 python pip 来安装，运行如下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//安装 pip</div><div class="line">sudo apt-get install python-pip</div><div class="line"></div><div class="line">//安装 docker-compose</div><div class="line">pip install docker-compose</div></pre></td></tr></table></figure>
-<p>安装了 <strong>docker-compose</strong> 后，就需要部署 <strong>Docker-Gitlab</strong> 了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//下载脚本</div><div class="line">wget https://raw.githubusercontent.com/sameersbn/docker-gitlab/master/docker-compose.yml</div><div class="line">//第一次运行，来编译，创建容器</div><div class="line">docker-compose  up</div><div class="line"></div><div class="line">//后面可以运行一下命令启动或停止容器</div><div class="line">docker-compose start</div><div class="line"></div><div class="line">docker-compose stop</div></pre></td></tr></table></figure>
-<p>最后，说一下如何备份 <strong>Docker-Gitlab</strong> 的数据，运行以下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">sudo docker run --name gitlab -it --rm \</div><div class="line">--link [你的postgresql容器名称]:postgresql --link \ [你的redis容器名称]:redisio \</div><div class="line">--net [docker-compose 初次运行时创建的网络名]  \</div><div class="line">-e &apos;DB_ADAPTER=postgresql&apos; \</div><div class="line">-e &apos;DB_HOST=postgresql&apos; \</div><div class="line">-e &apos;DB_PORT=5432&apos; \</div><div class="line">-e &apos;DB_USER=gitlab&apos; \</div><div class="line">-e &apos;DB_PASS=password&apos; \</div><div class="line">-e &apos;DB_NAME=gitlabhq_production&apos; \</div><div class="line">-e &apos;REDIS_HOST=redis&apos; \</div><div class="line">-e &apos;REDIS_PORT=6379&apos; \</div><div class="line">--publish 10022:22 --publish 10080:80 \</div><div class="line">--env &apos;GITLAB_PORT=10080&apos; --env &apos;GITLAB_SSH_PORT=10022&apos; \</div><div class="line">--env &apos;GITLAB_SECRETS_DB_KEY_BASE=long-and-random-alpha-numeric-string&apos; \</div><div class="line">--volume /srv/docker/gitlab/gitlab:/home/git/data \</div><div class="line">sameersbn/gitlab:8.9.6 app:rake gitlab:backup:create</div></pre></td></tr></table></figure>
-<p>正常情况下你会看下以下画面：<br><a href="https://jjandxa.github.io/images/20160714dockergitlabbackup.png" target="_blank" rel="external"><img src="/images/20160714dockergitlabbackup.png" alt="docker-gitlab backup"></a></p>
-<p>备份文件放在 <strong>/srv/docker/gitlab/gitlab/backups</strong> 目录下，更换服务器时，只需要将备份文件放到新服务器恢复，一切就完成啦</p>
-<h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1>
-          
+<p>对于第三点，如果使用 <strong>Git Flow</strong> 工作流的话实现不了强制性代码评审，直到后来看到了 <strong>Gitlab</strong> 。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/07/14/部署Docker-Gitlab/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -554,31 +533,18 @@
 
       
         
-          
-            <p><strong>什么是 RequireJS</strong> — 自己 Google 去。</p>
-<h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><p><a href="http://requirejs.org/" target="_blank" rel="external">点我去官网</a></p>
+          <p><strong>什么是 RequireJS</strong> — 自己 Google 去。</p>
+<h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><p><a href="http://requirejs.org/">点我去官网</a></p>
 <p>刚认识用 RequireJS 之前，我还不知道前端还能这样模块化编程，尽管我是个渣，但当我第一次用上之后就回不去以前了，模块化管理你的 JS 是很有必要的，有利于前端工程的规范化管理，页面也不用写很多 link 标签和 script 标签了。</p>
 <h2 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a>AMD</h2><p>由于 RequireJS 是基于 AMD 规范的，我们需要来了解它是怎么使用的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//hello.js</div><div class="line">define([&apos;jquery&apos;],function($) &#123;</div><div class="line">    //$(&apos;body&apos;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p>这是一个基于的 AMD 规范定义的模块，它接收两个参数，第一个为依赖的字符串数组，第二个为回调的函数。这个例子表明它依赖于 jquery ，RequireJS 在调用加载这个模块时会提前将 jquery 加载进来，并作为参数传进回调函数。</p>
-<p>然而我们要怎么使用这个模块呢？</p>
-<p><code>var hello = require([&#39;hello&#39;])</code></p>
-<p>这样就可以将一个 define 模块加载进来，并且使用它。然并卵，我们还是结合实例讲解更容易让人理解。</p>
-<h2 id="Hello-RequireJS"><a href="#Hello-RequireJS" class="headerlink" title="Hello RequireJS"></a>Hello RequireJS</h2><p>以往我们调用 JS 无非是使用外联标签 script 将 JS 文件引入，这样无可避免的会出现如下丑陋的场景</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"a.js"</span> &gt;&lt;/script&gt;</div><div class="line">&lt;script src=<span class="string">"b.js"</span> &gt;&lt;/script&gt;</div><div class="line">&lt;script src=<span class="string">"c.js"</span> &gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
-<p>可以想象，当你需要引入的 JS 文件越来越多时会是一副什么景象。正确的做法是</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;</div><div class="line">&lt;head&gt;</div><div class="line">  &lt;meta charset="UTF-8"&gt;</div><div class="line">  &lt;title&gt;Hello RequireJS&lt;/title&gt;</div><div class="line">  &lt;script src="require.js" &gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;script&gt;</div><div class="line">  var a = require('a')</div><div class="line">  var b = require('b')</div><div class="line">  var c = require('c')</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<p>怎么样？是否简洁了很多呢？然而还不够，我们希望 JS 代码尽量抽离出 HTML ，所以我们可以这样写</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// main.js</div><div class="line">define([&apos;a&apos;, &apos;b&apos;, &apos;c&apos;], function(a, b, c) &#123;</div><div class="line"></div><div class="line">&#125;)</div><div class="line">// index.html</div><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;</div><div class="line">&lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">	&lt;title&gt;Hello RequireJS&lt;/title&gt;</div><div class="line">	&lt;script data-main=&quot;main&quot; src=&quot;require.js&quot; &gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<p>实在太简洁了，优美的代码总是让人愉悦，不是么？</p>
-<h2 id="开始使用啦"><a href="#开始使用啦" class="headerlink" title="开始使用啦"></a>开始使用啦</h2><p>由于我们的实际项目没有这么简单，所以我们需要对 RequireJS 进行一些基础配置先看一下项目目录<br><a href="https://jjandxa.github.io/images/20160627REQUIREJS1.png" target="_blank" rel="external"><img src="/images/20160627REQUIREJS1.png" alt="project"></a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">// main.js</div><div class="line">require.config(&#123;</div><div class="line">  // 所有的路径会以 baseUrl 为基础    </div><div class="line">  baseUrl: &apos;static/lib&apos;,    </div><div class="line">  // 定义模块    </div><div class="line">  paths: &#123;        </div><div class="line">    app: &apos;../js&apos;.        </div><div class="line">    jquery: &apos;jquery-3.0.0&apos;    </div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line">// js/hello.js</div><div class="line">define([&apos;jquery&apos;], function ($) &#123;    </div><div class="line">	$(&apos;body&apos;).append(&apos;&lt;p&gt;Hello RequireJS!&lt;/p&gt;&apos;)</div><div class="line">&#125;)</div><div class="line">// index.html</div><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;</div><div class="line">  &lt;meta content=&quot;width=device-width, initial-scale=1&quot; name=&quot;viewport&quot;/&gt;</div><div class="line">  &lt;title&gt;Hello RequireJS&lt;/title&gt;</div><div class="line">  &lt;script src=&quot;static/require.js&quot; &gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;script&gt;</div><div class="line">require([&apos;static/main&apos;], function () &#123;</div><div class="line">	require([&apos;app/hello&apos;])</div><div class="line">&#125;)</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<p>完成啦，只需要在 HTML 页面引入 require.js ，并且依赖 main.js 全局配置文件，然后就可以尽情依赖自己的模块了！！<br>打开 index.html<br><a href="https://jjandxa.github.io/images/20160627REQUIREJS2.png" target="_blank" rel="external"><img src="/images/20160627REQUIREJS2.png" alt="index"></a></p>
-<h2 id="非AMD模块的兼容"><a href="#非AMD模块的兼容" class="headerlink" title="非AMD模块的兼容"></a>非AMD模块的兼容</h2><p>我们知道 jquery 有很多优秀的插件，它们都依赖于 jquery ，但是很遗憾的是有很多插件并不支持 AMD 规范，这导致我们依赖这些插件时会遇到一些错误，我们该怎么处理呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">require.config(&#123;    </div><div class="line">  //省略    ...    </div><div class="line">  shim: &#123;        </div><div class="line">    &apos;jquery-plugin&apos;: &#123;</div><div class="line">      deps: [&apos;jquery&apos;]</div><div class="line">    &#125;    </div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p>RequireJS 提供了 shim 选项为非 AMD 模块进行兼容，我们为 jquery-plugin 插件手动配置了其依赖于 jquery ，这样 RequireJS 会确保 jquery 在 jquery-plugin 之前加载！<br><strong>是不是很完美呢？</strong>附上源码:<br><a href="https://github.com/jjandxa/requirejs-demo" target="_blank" rel="external">requirejs-demo</a></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/05/09/RequireJS-填坑/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

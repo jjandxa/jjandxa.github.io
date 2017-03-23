@@ -101,7 +101,7 @@ Start点我去官网
 AMD由于 RequireJS 是基于 AMD 规范的，我们需要来了解它是怎">
 <meta property="og:image" content="http://yoursite.com/images/20160627REQUIREJS1.png">
 <meta property="og:image" content="http://yoursite.com/images/20160627REQUIREJS2.png">
-<meta property="og:updated_time" content="2017-03-23T03:23:21.000Z">
+<meta property="og:updated_time" content="2017-03-23T08:04:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RequireJS 填坑">
 <meta name="twitter:description" content="什么是 RequireJS — 自己 Google 去。
@@ -379,6 +379,7 @@ AMD由于 RequireJS 是基于 AMD 规范的，我们需要来了解它是怎">
 <p>刚认识用 RequireJS 之前，我还不知道前端还能这样模块化编程，尽管我是个渣，但当我第一次用上之后就回不去以前了，模块化管理你的 JS 是很有必要的，有利于前端工程的规范化管理，页面也不用写很多 link 标签和 script 标签了。</p>
 <h2 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a>AMD</h2><p>由于 RequireJS 是基于 AMD 规范的，我们需要来了解它是怎么使用的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//hello.js</div><div class="line">define([&apos;jquery&apos;],function($) &#123;</div><div class="line">    //$(&apos;body&apos;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>这是一个基于的 AMD 规范定义的模块，它接收两个参数，第一个为依赖的字符串数组，第二个为回调的函数。这个例子表明它依赖于 jquery ，RequireJS 在调用加载这个模块时会提前将 jquery 加载进来，并作为参数传进回调函数。</p>
 <p>然而我们要怎么使用这个模块呢？</p>
 <p><code>var hello = require([&#39;hello&#39;])</code></p>
