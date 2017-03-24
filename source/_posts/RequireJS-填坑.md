@@ -7,8 +7,6 @@ tags:
 - 前端
 categories:
 - JavaScript
-- RequireJS
-- 前端
 ---
 
 **什么是 RequireJS** — 自己 Google 去。
@@ -29,6 +27,7 @@ define(['jquery'],function($) {
     //$('body')
 })
 ```
+<!-- more -->
 
 这是一个基于的 AMD 规范定义的模块，它接收两个参数，第一个为依赖的字符串数组，第二个为回调的函数。这个例子表明它依赖于 jquery ，RequireJS 在调用加载这个模块时会提前将 jquery 加载进来，并作为参数传进回调函数。
 
