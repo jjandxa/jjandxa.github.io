@@ -1134,8 +1134,8 @@ pre .javascript .function {
     padding-right: 10px;
   }
   .post-body .highlight {
-    margin-left: -40px;
-    margin-right: -40px;
+    margin-left: 0px;
+    margin-right: 0px;
     padding: 0;
   }
   .post-body .highlight .gutter pre {
@@ -1691,7 +1691,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #eb6208;
+  background: #96fabd;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2095,6 +2095,9 @@ pre .javascript .function {
 }
 .jiathis_style a {
   border: none;
+}
+.fa {
+  font-family: FontAwesome !important;
 }
 .post-spread {
   margin-top: 20px;
