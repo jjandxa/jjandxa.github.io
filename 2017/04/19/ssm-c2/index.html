@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="糖醋排骨没有虾">
 <meta property="og:description" content="前情回顾　在第一章里，我们完成了一个基于 Spring + Spring MVC 的 Web 应用程序。但在我们现实中，一个具有一定业务能力的 Web 系统往往都需要进行数据的持久化。接下来，我们会在第一章的基础上，整合 ORM 框架 — Mybatis 。  ORM: Object Relational Mapping 对象关系映射">
 <meta property="og:image" content="http://yoursite.com/images/ssm/ssm-c2-test.png">
-<meta property="og:updated_time" content="2017-04-23T09:44:51.000Z">
+<meta property="og:updated_time" content="2017-04-23T10:01:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSM 整合教程，献给新人们的礼物-第二章">
 <meta name="twitter:description" content="前情回顾　在第一章里，我们完成了一个基于 Spring + Spring MVC 的 Web 应用程序。但在我们现实中，一个具有一定业务能力的 Web 系统往往都需要进行数据的持久化。接下来，我们会在第一章的基础上，整合 ORM 框架 — Mybatis 。  ORM: Object Relational Mapping 对象关系映射">
@@ -417,6 +417,7 @@
 <p>来测试一下吧，启动服务。观察控制台输出，若没有异常，便说明整合并无出现明显错误。访问 <strong><a href="http://localhost:8080/hellossm/hello" target="_blank" rel="external">http://localhost:8080/hellossm/hello</a></strong></p>
 <p><img src="/images/ssm/ssm-c2-test.png" alt="ssm-c2-test"></p>
 <p>成功查询出数据！大成功！！！</p>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p><a href="https://github.com/jjandxa/hello-ssm/tree/Chapter-2" target="_blank" rel="external">源代码</a></p>
 <h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>SSM 整合教程到这里就结束了。这些东西很简单，但我想作为新手们入门的一个敲门砖很合适。我们不仅需要知道如何整合框架，也需要明白这些框架如何使用。后续可能会出 Spring MVC 入门使用教程，Mybatis 入门使用教程。当然，最后还是会告诉大家。以上这么繁杂的配置过程，其实都可以用 Spring Boot 来快速解决。但在那之前，希望新手们能够多花时间学习、实践、总结。</p>
 <div style="text-align: center;">^_^</div>
       
@@ -663,7 +664,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前情回顾"><span class="nav-number">1.</span> <span class="nav-text">前情回顾</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加-Mybatis-依赖"><span class="nav-number">2.</span> <span class="nav-text">添加 Mybatis 依赖</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建数据库配置文件"><span class="nav-number">3.</span> <span class="nav-text">创建数据库配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置数据源"><span class="nav-number">4.</span> <span class="nav-text">配置数据源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置-SqlSessionFactory"><span class="nav-number">5.</span> <span class="nav-text">配置 SqlSessionFactory</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置-AOP-事务管理"><span class="nav-number">6.</span> <span class="nav-text">配置 AOP 事务管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编写业务代码"><span class="nav-number">7.</span> <span class="nav-text">编写业务代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结语"><span class="nav-number">8.</span> <span class="nav-text">结语</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前情回顾"><span class="nav-number">1.</span> <span class="nav-text">前情回顾</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加-Mybatis-依赖"><span class="nav-number">2.</span> <span class="nav-text">添加 Mybatis 依赖</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建数据库配置文件"><span class="nav-number">3.</span> <span class="nav-text">创建数据库配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置数据源"><span class="nav-number">4.</span> <span class="nav-text">配置数据源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置-SqlSessionFactory"><span class="nav-number">5.</span> <span class="nav-text">配置 SqlSessionFactory</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置-AOP-事务管理"><span class="nav-number">6.</span> <span class="nav-text">配置 AOP 事务管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编写业务代码"><span class="nav-number">7.</span> <span class="nav-text">编写业务代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录"><span class="nav-number">8.</span> <span class="nav-text">附录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结语"><span class="nav-number">9.</span> <span class="nav-text">结语</span></a></li></ol></div>
             
 
           </div>
