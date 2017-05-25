@@ -1,5 +1,5 @@
 ---
-title: SSM 整合教程，献给新人们的礼物-第一章
+title: SSM 整合教程，献给新人们的礼物 - 第一章
 date: 2017-03-24 10:31:39
 tags:
 - Java
@@ -243,9 +243,6 @@ typora-root-url: ../../source
    <!-- 扫描 Spring 组件 -->
    <mvc:component-scan base-package="ml.jjandxa" ></mvc:component-scan>
 
-   <!-- 开启注解 -->
-   <mvc:annotation-config></mvc:annotation-config>
-
    <!-- 视图解析器 -->
    <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver" >
      <!-- JSTL 解析器 -->
@@ -257,6 +254,13 @@ typora-root-url: ../../source
      <!-- 视图后缀 -->
      <property name="suffix" value=".jsp" />
    </bean>
+   ```
+
+   **ssm-context.xml** 添加以下内容：
+
+   ```xml
+   <!-- 开启注解 -->
+   <mvc:annotation-config></mvc:annotation-config>
    ```
 
    > 以上配置设置了 Spring 扫描 ml.jjandxa 包下的所有组件，并且开始注解配置。最后设置了 Srping MVC 的视图解析器。
