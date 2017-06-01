@@ -10,37 +10,33 @@ NexT.utils = NexT.$u = {
       .not('.group-picture img, .post-gallery img')
       .each(function () {
         var $image = $(this);
-        var imageTitle = $image.attr('title');
+        var imageTitle = $image.parents('article').find('.post-title-link');
+        if (!imageTitle) {
+          imageTitle = $image.parents('article').find('.post-title');
+        }
+        imageTitle.text().replace('/(^\s*)|(\s*$)/g', '');
         var $imageWrapLink = $image.parent('a');
 
         if ($imageWrapLink.size() < 1) {
-          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+          $imageWrapLink = $image.wrap('<a style="outline: none;" data-fancybox="' + 
+          imageTitle + '" data-type="image" href="' + this.getAttribute('src')  + '"></a>').parent('a');
         }
 
-        $imageWrapLink.addClass('fancybox fancybox.image');
-        $imageWrapLink.attr('rel', 'group');
-
         if (imageTitle) {
-          $imageWrapLink.append('<p class="image-caption">' + imageTitle + '</p>');
-
-          //make sure img title tag will show correctly in fancybox
-          $imageWrapLink.attr('title', imageTitle);
+          $imageWrapLink.attr('data-caption', imageTitle);
         }
       });
 
-    $('.fancybox').fancybox({
-      helpers: {
-        overlay: {
-          locked: false
-        }
-      }
+    $('[data-fancybox]').fancybox({
+      closeClickOutside: true
     });
   },
 
   lazyLoadPostsImages: function () {
     $('#posts').find('img').lazyload({
-      placeholder: '/images/loading.gif',
-      effect: 'fadeIn'
+      //placeholder: '/images/loading.gif',
+      effect: 'fadeIn',
+      threshold : 0
     });
   },
 
@@ -66,7 +62,8 @@ NexT.utils = NexT.$u = {
       var scrollTop = $(window).scrollTop();
       var docHeight = $('#content').height();
       var winHeight = $(window).height();
-      var scrollPercent = (scrollTop) / (docHeight - winHeight);
+      var contentMath = (docHeight > winHeight) ? (docHeight - winHeight) : ($(document).height() - winHeight);
+      var scrollPercent = (scrollTop) / (contentMath);
       var scrollPercentRounded = Math.round(scrollPercent*100);
       var scrollPercentMaxed = (scrollPercentRounded > 100) ? 100 : scrollPercentRounded;
       $('#scrollpercent>span').html(scrollPercentMaxed);

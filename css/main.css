@@ -476,8 +476,8 @@ pre,
   margin: 20px 0;
   padding: 0;
   font-size: 13px;
-  color: #ccc;
-  background: #2d2d2d;
+  color: #4d4d4c;
+  background: #f7f7f7;
   line-height: 1.6;
 }
 pre,
@@ -494,7 +494,7 @@ code {
 }
 pre code {
   padding: 0;
-  color: #ccc;
+  color: #4d4d4c;
   background: none;
   text-shadow: none;
 }
@@ -517,7 +517,7 @@ pre code {
 }
 .highlight figcaption {
   font-size: 1em;
-  color: #ccc;
+  color: #4d4d4c;
   line-height: 1em;
   margin-bottom: 1em;
 }
@@ -531,23 +531,23 @@ pre code {
 }
 .highlight figcaption a {
   float: right;
-  color: #ccc;
+  color: #4d4d4c;
 }
 .highlight figcaption a:hover {
-  border-bottom-color: #ccc;
+  border-bottom-color: #4d4d4c;
 }
 .highlight .gutter pre {
   padding-left: 10px;
   padding-right: 10px;
-  color: #999;
+  color: #869194;
   text-align: right;
-  background-color: #1b1b1b;
+  background-color: #eff2f3;
 }
 .highlight .code pre {
   width: 100%;
   padding-left: 10px;
   padding-right: 10px;
-  background-color: #2d2d2d;
+  background-color: #f7f7f7;
 }
 .highlight .line {
   height: 20px;
@@ -565,16 +565,16 @@ pre code {
   border: none;
 }
 pre .deletion {
-  background: #008000;
+  background: #fdd;
 }
 pre .addition {
-  background: #800000;
+  background: #dfd;
 }
 pre .meta {
-  color: #c9c;
+  color: #8959a8;
 }
 pre .comment {
-  color: #999;
+  color: #8e908c;
 }
 pre .variable,
 pre .attribute,
@@ -588,7 +588,7 @@ pre .html .doctype,
 pre .css .id,
 pre .css .class,
 pre .css .pseudo {
-  color: #f2777a;
+  color: #c82829;
 }
 pre .number,
 pre .preprocessor,
@@ -597,7 +597,7 @@ pre .literal,
 pre .params,
 pre .constant,
 pre .command {
-  color: #f99157;
+  color: #f5871f;
 }
 pre .ruby .class .title,
 pre .css .rules .attribute,
@@ -610,11 +610,11 @@ pre .xml .cdata,
 pre .special,
 pre .number,
 pre .formula {
-  color: #9c9;
+  color: #718c00;
 }
 pre .title,
 pre .css .hexcolor {
-  color: #6cc;
+  color: #3e999f;
 }
 pre .function,
 pre .python .decorator,
@@ -624,11 +624,11 @@ pre .ruby .title .keyword,
 pre .perl .sub,
 pre .javascript .title,
 pre .coffeescript .title {
-  color: #69c;
+  color: #4271ae;
 }
 pre .keyword,
 pre .javascript .function {
-  color: #c9c;
+  color: #8959a8;
 }
 .full-image.full-image.full-image {
   border: none;
@@ -1228,11 +1228,13 @@ pre .javascript .function {
   position: relative;
   margin: 60px 0;
 }
+.posts-collapse .collection-title h1,
 .posts-collapse .collection-title h2 {
   margin-left: 20px;
 }
 .posts-collapse .collection-title small {
   color: #bbb;
+  margin-left: 5px;
 }
 .posts-collapse .collection-title::before {
   content: " ";
@@ -1375,6 +1377,9 @@ pre .javascript .function {
   font-size: 14px;
   margin-top: 2px;
 }
+.post-wordcount {
+  display: inline-block;
+}
 .post-meta-divider {
   margin: 0 0.5em;
 }
@@ -1405,26 +1410,6 @@ pre .javascript .function {
   .posts-expand .post-comments-count {
     display: none;
   }
-}
-.social-like {
-  font-size: 14px;
-  height: 20px;
-  text-align: center;
-  border-top: 1px solid #eee;
-  padding-top: 9px;
-  margin-top: 45px;
-  display: flex;
-  justify-content: center;
-}
-.vk_like {
-  width: 85px;
-  height: 21px;
-  padding-top: 7px;
-  align-self: center;
-}
-.fb_like {
-  height: 30px;
-  align-self: center;
 }
 .post-button {
   margin-top: 50px;
@@ -1692,7 +1677,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #3cf0a4;
+  background: #ff490e;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2161,7 +2146,6 @@ pre .javascript .function {
 }
 .local-search-popup .search-keyword {
   border-bottom: 1px dashed #f00;
-  font-size: 14px;
   font-weight: bold;
   color: #f00;
 }
@@ -2180,7 +2164,7 @@ pre .javascript .function {
 }
 .local-search-popup .local-search-input-wrapper {
   display: inline-block;
-  width: calc(100% - 60px);
+  width: calc(100% - 90px);
   height: 36px;
   line-height: 36px;
   padding: 0 5px;
@@ -2202,6 +2186,8 @@ pre .javascript .function {
   color: #999;
   height: 36px;
   width: 18px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .local-search-popup .search-icon {
   float: left;
@@ -2210,7 +2196,6 @@ pre .javascript .function {
   border-left: 1px solid #eee;
   float: right;
   cursor: pointer;
-  padding-left: 10px;
 }
 .local-search-popup #no-result {
   position: absolute;
