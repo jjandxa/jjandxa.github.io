@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="JavaScript,前端,Webpack,NodeJS," />
 
 
 
@@ -93,18 +93,17 @@
 
 
 
-<meta name="keywords">
+<meta name="keywords" content="JavaScript,前端,Webpack,NodeJS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我眼中的锤子手机 - 锤子科技 2017 春季新品发布会">
-<meta property="og:url" content="http://yoursite.com/2017/05/08/smartisan-1/index.html">
+<meta property="og:title" content="Webpack2 学习记录 — 第二章·模块热替换/兼容配置">
+<meta property="og:url" content="http://yoursite.com/2017/06/13/webpack-guide-2/index.html">
 <meta property="og:site_name" content="糖醋排骨没有虾">
-<meta property="og:image" content="http://yoursite.com/images/smartisan-new-product.png">
-<meta property="og:image" content="http://yoursite.com/images/07.jpg">
-<meta property="og:image" content="http://yoursite.com/images/02.png">
-<meta property="og:updated_time" content="2017-05-29T11:38:19.000Z">
+<meta property="og:image" content="http://yoursite.com/images/webpack-guide-2/lines-of-code.jpg">
+<meta property="og:image" content="http://yoursite.com/images/webpack-guide-2/2.png">
+<meta property="og:updated_time" content="2017-06-13T14:39:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我眼中的锤子手机 - 锤子科技 2017 春季新品发布会">
-<meta name="twitter:image" content="http://yoursite.com/images/smartisan-new-product.png">
+<meta name="twitter:title" content="Webpack2 学习记录 — 第二章·模块热替换/兼容配置">
+<meta name="twitter:image" content="http://yoursite.com/images/webpack-guide-2/lines-of-code.jpg">
 
 
 
@@ -132,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/08/smartisan-1/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/13/webpack-guide-2/"/>
 
 
 
 
 
-  <title>我眼中的锤子手机 - 锤子科技 2017 春季新品发布会 | 糖醋排骨没有虾</title>
+  <title>Webpack2 学习记录 — 第二章·模块热替换/兼容配置 | 糖醋排骨没有虾</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -292,7 +291,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/08/smartisan-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/13/webpack-guide-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="jjandxa">
@@ -309,7 +308,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">我眼中的锤子手机 - 锤子科技 2017 春季新品发布会</h1>
+          <h1 class="post-title" itemprop="name headline">Webpack2 学习记录 — 第二章·模块热替换/兼容配置</h1>
         
 
         <div class="post-meta">
@@ -321,8 +320,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-08T23:11:04+08:00">
-                2017-05-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-13T12:28:37+08:00">
+                2017-06-13
               </time>
             
 
@@ -344,8 +343,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/杂谈/" itemprop="url" rel="index">
-                    <span itemprop="name">杂谈</span>
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
                   </a>
                 </span>
 
@@ -378,25 +377,52 @@
       
 
       
-        <p><img src="/images/smartisan-new-product.png" alt="smartisan-new-product"></p>
+        <p><img src="/images/webpack-guide-2/lines-of-code.jpg" alt="lines-of-code"></p>
 <a id="more"></a>
-<p>　　说起为什么知道老罗这个人。许多人都能追溯到老罗语录时期，十几岁便听着老罗语录长大。在那时，我还是个懵懵懂懂的小学生。在家看着各种国产、日产动画片，难以想象在今日会对这样一个胖子发出什么感想。</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>　　上一章我们完成了 Webpack 的基础配置。对项目常用的资源都进行了模块化，这一章主要说明在基于 Webpack 的项目上实现<strong>模块热替换 (HMR)</strong>。<strong>模块热替换</strong>表现在开发上，就是当我们修改某段 html 或者 js 时。浏览器会自动完成代码的替换切不需要刷新浏览器。别看这个事情很小，一旦习惯了这种设定，就很难回到传统的开发方式了。它对开发效率上的提升是肥肠有必要的，所以我们今天就在基于 Webpack 的项目上来实现这一特性。Webpack 里实现 <strong>HMR</strong> 有两种方式：</p>
+<ol>
+<li><p>webpack-dev-server</p>
+<p>自带服务器、配置简便。</p>
+</li>
+<li><p>webpack-dev-middleware</p>
+<p>这是一个中间件，必须搭配 express 等其他服务器来使用。配置较为复杂，需要有 express 等 Node 服务器使用经验。</p>
+</li>
+</ol>
+<p>这两个我们都会讲到</p>
 <blockquote>
-<p>我不是一个从小听着老罗语录长大的人。</p>
+<p>HMR： Hot Module Replacement</p>
 </blockquote>
-<p>　　我已经忘记第一次知道老罗时是在什么时候，依稀记得是在 12 年左右。那时还是个学生，当时对小米、王自如还存在好感。在他们之间微博的交流中知道了这个人，并且在某个慵懒的午后，不知在什么地方看了《一个理想主义者的创业故事 2》，之后便一发不可收拾。我抽时间看完了老罗的其他几场演讲，包括在吉林大学的那场《我的奋斗》。至于原因，可能就是因为比相声好看？</p>
-<blockquote class="blockquote-center">通过干干净净地赚钱让人相信干干净净地赚钱是可能的；通过实现理想让人相信实现理想是可能的；通过改变世界让人相信改变世界是可能的……即使是在中国。</blockquote>
+<h1 id="webpack-dev-server"><a href="#webpack-dev-server" class="headerlink" title="webpack-dev-server"></a>webpack-dev-server</h1><p>　　基于上一章的代码<a href="https://github.com/jjandxa/webpack-demo/tree/demo2" target="_blank" rel="external">源代码</a>进行开发，我们为其添加 webpack-dev-server 依赖 <code>yarn add webpack-dev-server</code> ，并且在 <strong>package.json</strong> 文件中为 <strong>scripts</strong> 属性添加一条脚本。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// package.json</div><div class="line"></div><div class="line">&#123;</div><div class="line">  // 省略代码</div><div class="line">  "scripts": &#123;</div><div class="line">    "dev": "webpack-dev-server --open"</div><div class="line">  &#125;,</div><div class="line">  // 省略代码</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后执行 <code>yarn run dev</code> ，正常情况下会自动打开浏览器并且访问项目。仔细观察，当我们改动 html 或 js 的时候会触发 Webpack 的构建过程，并且浏览器自动刷新了。这个阶段我们叫做<strong>实时重载</strong>，如果没有太多要求，这个时候也就已经够用了。但如果项目是一个 SPA 应用，那就需要更进一步的实现 <strong>HMR</strong> ，实现重新加载模块而不刷新页面。因为对于 SPA 应用来说 <strong>HMR</strong> 能更好的发挥它的作用。将 dev 脚本更改为 <code>&quot;dev&quot;: &quot;webpack-dev-server --open --inline -- hot&quot;</code> 启用热替换功能。并且在入口文件 <strong>main.js</strong> 开头加入以下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// main.js</span></div><div class="line"><span class="keyword">if</span>(<span class="built_in">module</span>.hot)</div><div class="line">    <span class="built_in">module</span>.hot.accept();</div><div class="line"></div><div class="line"><span class="comment">// 省略代码</span></div></pre></td></tr></table></figure>
+<p>更改 <strong>common.css</strong> 中 box 的背景色，保存后查看浏览器状态。会发现页面在不刷新的情况下更新了 div.box 的背景色。观察控制台的内容，提示已经更新了模块。<img src="/images/webpack-guide-2/2.png" alt="2"></p>
+<blockquote>
+<p>需要注意的是 index.html 并不在依赖索引中，尽管会触发 webpack 的构建过程，但 webpack-dev-server hmr 并不会重载 index.html 的内容。</p>
+</blockquote>
+<p><a href="https://github.com/jjandxa/webpack-demo/tree/webpack-dev-server" target="_blank" rel="external">源代码</a></p>
+<h1 id="webpack-dev-middleware"><a href="#webpack-dev-middleware" class="headerlink" title="webpack-dev-middleware"></a>webpack-dev-middleware</h1><p>　　同样适用上一章代码<a href="https://github.com/jjandxa/webpack-demo/tree/demo2" target="_blank" rel="external">源代码</a>进行开发。相对于 <strong>webpack-dev-server</strong> 来说，因为需要另外配置服务器，所以<strong>webpack-dev-middleware</strong> 的使用相对复杂一点。</p>
+<blockquote>
+<p>这里需要有点 express 基础</p>
+</blockquote>
+<p>添加 <strong>wepack-dev-middleware</strong> 与 <strong>express</strong>依赖 <code>yarn add wepack-dev-middleware express</code> 。新建 <strong>build/dev-server.js</strong> 文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// dev-server.js</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">"express"</span>);</div><div class="line"><span class="keyword">var</span> webpackDevMiddleware = <span class="built_in">require</span>(<span class="string">"webpack-dev-middleware"</span>);</div><div class="line"><span class="keyword">var</span> webpack = <span class="built_in">require</span>(<span class="string">"webpack"</span>);</div><div class="line"><span class="keyword">var</span> webpackConfig = <span class="built_in">require</span>(<span class="string">"../webpack.config"</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line"><span class="keyword">var</span> compiler = webpack(webpackConfig);</div><div class="line"></div><div class="line">app.use(webpackDevMiddleware(compiler, &#123;</div><div class="line">  <span class="attr">publicPath</span>: <span class="string">"/"</span> <span class="comment">// 大部分情况下和 `output.publicPath`相同</span></div><div class="line">&#125;));</div><div class="line"></div><div class="line">app.listen(<span class="number">8080</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">"Listening on port 8080!"</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p> 以上代码的作用是启动 webpack ，并且配置 webpack-dev-middleware 中间件，最后启动 express。这仅仅是创建了一个基于 webpack 的开发服务器，实现 HMR 我们需要再添加一个依赖 <strong>webpack-hot-middleware</strong> <code>yarn add webpack-hot-middleware</code> 。在 webpack.config.js 中修改一下内容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// webpack.config.js</span></div><div class="line"><span class="comment">// 省略相关代码</span></div><div class="line"><span class="keyword">var</span> webpack = <span class="built_in">require</span>(<span class="string">"webpack"</span>)</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">  <span class="attr">entry</span>: [<span class="string">'./build/dev-client.js'</span>, <span class="string">'./src/main.js'</span>],</div><div class="line">  <span class="comment">// 省略相关代码</span></div><div class="line">  plugins: [</div><div class="line">    <span class="comment">// 省略相关代码</span></div><div class="line">    <span class="keyword">new</span> webpack.HotModuleReplacementPlugin(),</div><div class="line">    <span class="keyword">new</span> webpack.NoErrorsPlugin()</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>创建 <strong>build/dev-client.js</strong> 文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// dev-client.js</span></div><div class="line"><span class="built_in">require</span>(<span class="string">'eventsource-polyfill'</span>)</div><div class="line"><span class="keyword">var</span> hotClient = <span class="built_in">require</span>(<span class="string">'webpack-hot-middleware/client?noInfo=true&amp;reload=true'</span>)</div><div class="line"></div><div class="line">hotClient.subscribe(<span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (event.action === <span class="string">'reload'</span>) &#123;</div><div class="line">    <span class="built_in">window</span>.location.reload()</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>安装 eventsource-polyfill 依赖以兼容不支持事件源的浏览器 <code>yarn add eventsource-polyfill</code> ，添加完以上内容后，修改 <strong>dev-server.js</strong> 文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// dev-server.js</span></div><div class="line"><span class="comment">// 省略相关代码</span></div><div class="line"><span class="keyword">var</span> webpackHotMiddleware = <span class="built_in">require</span>(<span class="string">"webpack-hot-middleware"</span>)</div><div class="line"></div><div class="line"><span class="keyword">var</span> compiler = webpack(webpackConfig);</div><div class="line"></div><div class="line"><span class="keyword">var</span> hotMiddleware = webpackHotMiddleware(compiler);</div><div class="line"></div><div class="line"><span class="comment">// 解决 index.html 修改后不刷新问题</span></div><div class="line">compiler.plugin(<span class="string">'compilation'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">compilation</span>) </span>&#123;</div><div class="line">  compilation.plugin(<span class="string">'html-webpack-plugin-after-emit'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data, cb</span>) </span>&#123;</div><div class="line">    hotMiddleware.publish(&#123; <span class="attr">action</span>: <span class="string">'reload'</span> &#125;)</div><div class="line">    cb()</div><div class="line">  &#125;)</div><div class="line">&#125;)</div><div class="line"></div><div class="line">app.use(hotMiddleware);</div><div class="line"></div><div class="line"><span class="comment">// 省略相关代码</span></div></pre></td></tr></table></figure>
+<p>测试效果，实现了 HMR ，并解决 <strong>webpack-dev-server</strong> 下 <strong>index.html</strong> 修改不刷新的问题。</p>
+<p><a href="https://github.com/jjandxa/webpack-demo/tree/webpack-dev-middleware" target="_blank" rel="external">源代码</a></p>
+<h1 id="第三方模块兼容"><a href="#第三方模块兼容" class="headerlink" title="第三方模块兼容"></a>第三方模块兼容</h1><p>　　大多数情况下，我们还会依赖一些对全局变量有要求的第三方库。例如各类 Jquery 插件，依赖于全局变量 <strong>$</strong> 或 <strong>jquery</strong> 。对于这种情况，可以使用 ProvidePlugin 插件。参考一下情况：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// webpack.config.js</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> webpack = <span class="built_in">require</span>(<span class="string">"webpack"</span>)</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">  <span class="comment">// 省略相关代码</span></div><div class="line">  plugins: [</div><div class="line">    <span class="comment">// 省略相关代码</span></div><div class="line">    <span class="keyword">new</span> webpack.ProvidePlugin(&#123;</div><div class="line">      <span class="attr">$</span>: <span class="string">'jquery'</span>,</div><div class="line">      <span class="attr">jQuery</span>: <span class="string">'jquery'</span></div><div class="line">    &#125;)</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>main.js 中使用 jquery ：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// main.js</span></div><div class="line"></div><div class="line"><span class="built_in">require</span>(<span class="string">'./css/common.css'</span>)</div><div class="line"></div><div class="line">$(<span class="string">"#app"</span>).addClass(<span class="string">"box"</span>)</div></pre></td></tr></table></figure>
+<p>测试后一切正常！</p>
+<p>兼容第三方模块还有其他方式，通过 <code>imports-loader</code> 、 <code>exports-loader</code> 都是解决第三方依赖的方式，可以参考<a href="https://doc.webpack-china.org/guides/shimming/" target="_blank" rel="external">官网相关资料</a>。</p>
+<p><a href="https://github.com/jjandxa/webpack-demo" target="_blank" rel="external">源代码</a></p>
 
-<p>　　打动我的其实是老罗与他的培训机构-<strong>老罗英语培训</strong>创业中的各种经历，让我知道我们还可以干干净净挣钱，认认真真做事。那时，我知道我们的价值观是相同的。我们相信善良、相信所有美好的事物，即使现在身处黑暗。</p>
-<p>　　我是一个科技爱好者，我喜欢游戏，SONY 的 PLAYSTATION 3、4、Vita，Nintendo 的 DS、3DS、WII、NS，MOTOROLA 的 MOTO360，APPLE 的 IPAD，IPHONE，MAC。科技产品总是让我内心充满激动，准确的讲，美好的事物总是让人激动的。在《一个理想主义者的创业故事 3》中，老罗公布了他做手机的计划，现在的我已经想不起当时是何种反应。那时小米崛起，一个英语老师转行做手机似乎并不是什么不可实现的事情？那时我肯定是充满期盼的。</p>
-<p>　　一年后，锤子 ROM 问世。那场发布会无疑是失败的，失控的三小时即使是躺在床上看完也是无比疲惫。不得不说，那时我有些失望。尽管在 ROM 上有些功能确实是有亮点，但我对它桌面的设计并不是特别认同。尽管依旧期待，但散去了不少热情。</p>
-<p>　　<blockquote class="blockquote-center">永远年轻，永远热泪盈眶。— 《The Dharm Bums》</blockquote></p>
-<p>　　又一年，我已从学生转变为一个上班族。我记得那年那晚，<strong>锤子科技 2014 产品发布会</strong>。刚下班我就急着回家，边吃饭边用着 iphone 5 看直播。它来了，带着骄傲。Smartisan T1 售价 3000 元起，我承认它的骄傲，只是我买不起。那时也震惊于很多人服了全款或部分货款等出货，却过了一个多月都拿不到。等到产能稳定时，T1 从 3000 + 降价到 2400 + 。那时我在顺电试用了 T1 ，在那之前我对这台手机的所有担忧全部消失的无影无踪。用那时的话讲就是好用的不像安卓手机，然后我用 2800 RMB 买了 4G 32G 版的黑色，现在想想觉得很可惜。因为我觉得 Smartisan T1 白色版真是绝美！<img src="/images/07.jpg" alt="07"></p>
-<p>　　一年后，我在长沙。在失望中购买了 Smartisan T2 ，失望的原因是因为配置。经过一年的服役，不算旗舰的 T1 已经显得有些力不从心。我急切的希望有一台性能强劲的手机，也希望从工业设计、软件系统都能像 Smartisan 做的那样好。我买 T2 唯一的理由只是因为它系统基于 Android 5.0.1，还有就是它美。</p>
-<p><img src="/images/02.png" alt="02"></p>
-<p>　　16年，Smartisan M系列面世。相对于外观的妥协，配置诚意满满，系统功能更新让人惊艳。<strong>One step</strong>、<strong>Big Bang</strong> 都是让人为之惊叹的优点，只是这并不够，外观中规中矩。对于之前用过 T1、T2，审美口味早已被养刁了的我总是在想，为什么锤科总是没有一部完美的手机呢？</p>
-<p>　　现在，锤子科技新品发布会即将到来。依旧让我激动，我希望它能成功。因为我相信美好的事物必将能成功。</p>
-<blockquote class="blockquote-center">如果一开始你没能成功，拿个更大的锤子</blockquote>
       
     </div>
 
@@ -423,6 +449,18 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+            <a href="/tags/Webpack/" rel="tag"># Webpack</a>
+          
+            <a href="/tags/NodeJS/" rel="tag"># NodeJS</a>
+          
+        </div>
+      
 
       
       
@@ -432,18 +470,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/09/my-game-experience-1/" rel="next" title="我的游戏历程 - 初见">
-                <i class="fa fa-chevron-left"></i> 我的游戏历程 - 初见
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/19/ssm-c2/" rel="prev" title="SSM 整合教程，献给新人们的礼物 - 第二章">
-                SSM 整合教程，献给新人们的礼物 - 第二章 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/29/webpack-guide-1/" rel="prev" title="Webpack2 学习记录 — 第一章·最小可用配置">
+                Webpack2 学习记录 — 第一章·最小可用配置 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -493,8 +527,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -612,6 +655,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#webpack-dev-server"><span class="nav-number">2.</span> <span class="nav-text">webpack-dev-server</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#webpack-dev-middleware"><span class="nav-number">3.</span> <span class="nav-text">webpack-dev-middleware</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三方模块兼容"><span class="nav-number">4.</span> <span class="nav-text">第三方模块兼容</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
