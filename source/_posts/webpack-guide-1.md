@@ -151,7 +151,7 @@ module.exports = {
     rules: {
       // css-loader 省略相关代码
       {
-        test: /\.(png|jpe?g|git|svg)(\?.*)?$/,
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
           use: {
             loader: 'url-loader',
             options: {
@@ -206,12 +206,12 @@ module.exports = {
       // 省略相关代码
       {
         test: /\.html$/,
-          use: {
-            loader: 'html-loader',
-            options: {
-              minimize: true
-            }
+        use: {
+          loader: 'html-loader',
+          options: {
+            minimize: true
           }
+        }
       }
     }
   }
