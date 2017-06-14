@@ -100,7 +100,7 @@
 <meta property="og:site_name" content="糖醋排骨没有虾">
 <meta property="og:image" content="http://yoursite.com/images/webpack-guide-2/lines-of-code.jpg">
 <meta property="og:image" content="http://yoursite.com/images/webpack-guide-2/2.png">
-<meta property="og:updated_time" content="2017-06-13T15:36:55.000Z">
+<meta property="og:updated_time" content="2017-06-14T02:30:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Webpack2 学习记录 — 第二章·模块热替换/兼容配置">
 <meta name="twitter:image" content="http://yoursite.com/images/webpack-guide-2/lines-of-code.jpg">
@@ -392,14 +392,14 @@
 <blockquote>
 <p>HMR： Hot Module Replacement</p>
 </blockquote>
-<h1 id="webpack-dev-server"><a href="#webpack-dev-server" class="headerlink" title="webpack-dev-server"></a>webpack-dev-server</h1><p>　　基于上一章的代码<a href="https://github.com/jjandxa/webpack-demo/tree/demo2" target="_blank" rel="external">源代码</a>进行开发，我们为其添加 webpack-dev-server 依赖 <code>yarn add webpack-dev-server</code> ，并且在 <strong>package.json</strong> 文件中为 <strong>scripts</strong> 属性添加一条脚本。</p>
+<h1 id="webpack-dev-server"><a href="#webpack-dev-server" class="headerlink" title="webpack-dev-server"></a>webpack-dev-server</h1><p>　　基于上一章的<a href="https://github.com/jjandxa/webpack-demo/tree/demo2" target="_blank" rel="external">源代码</a>进行开发，我们为其添加 webpack-dev-server 依赖 <code>yarn add webpack-dev-server</code> ，并且在 <strong>package.json</strong> 文件中为 <strong>scripts</strong> 属性添加一条脚本。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// package.json</div><div class="line"></div><div class="line">&#123;</div><div class="line">  // 省略代码</div><div class="line">  "scripts": &#123;</div><div class="line">    "dev": "webpack-dev-server --open"</div><div class="line">  &#125;,</div><div class="line">  // 省略代码</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>最后执行 <code>yarn run dev</code> ，正常情况下会自动打开浏览器并且访问项目。仔细观察，当我们改动 html 或 js 的时候会触发 Webpack 的构建过程，并且浏览器自动刷新了。这个阶段我们叫做<strong>实时重载</strong>，如果没有太多要求，这个时候也就已经够用了。但如果项目是一个 SPA 应用，那就需要更进一步的实现 <strong>HMR</strong> ，实现重新加载模块而不刷新页面。因为对于 SPA 应用来说 <strong>HMR</strong> 能更好的发挥它的作用。将 dev 脚本更改为 <code>&quot;dev&quot;: &quot;webpack-dev-server --open --inline -- hot&quot;</code> 启用热替换功能。更改 <strong>common.css</strong> 中 box 的背景色，保存后查看浏览器状态。会发现页面在不刷新的情况下更新了 div.box 的背景色。观察控制台的内容，提示已经更新了模块。<img src="/images/webpack-guide-2/2.png" alt="2"></p>
 <blockquote>
 <p>需要注意的是 index.html 并不在依赖索引中，尽管会触发 webpack 的构建过程，但 webpack-dev-server hmr 并不会重载 index.html 的内容。</p>
 </blockquote>
 <p><a href="https://github.com/jjandxa/webpack-demo/tree/webpack-dev-server" target="_blank" rel="external">源代码</a></p>
-<h1 id="webpack-dev-middleware"><a href="#webpack-dev-middleware" class="headerlink" title="webpack-dev-middleware"></a>webpack-dev-middleware</h1><p>　　同样适用上一章代码<a href="https://github.com/jjandxa/webpack-demo/tree/demo2" target="_blank" rel="external">源代码</a>进行开发。相对于 <strong>webpack-dev-server</strong> 来说，因为需要另外配置服务器，所以<strong>webpack-dev-middleware</strong> 的使用相对复杂一点。</p>
+<h1 id="webpack-dev-middleware"><a href="#webpack-dev-middleware" class="headerlink" title="webpack-dev-middleware"></a>webpack-dev-middleware</h1><p>　　同样使用上一章<a href="https://github.com/jjandxa/webpack-demo/tree/demo2" target="_blank" rel="external">源代码</a>进行开发。相对于 <strong>webpack-dev-server</strong> 来说，因为需要另外配置服务器，所以<strong>webpack-dev-middleware</strong> 的使用相对复杂一点。</p>
 <blockquote>
 <p>这里需要有点 express 基础</p>
 </blockquote>
@@ -468,6 +468,10 @@
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/14/webpack-guide-3/" rel="next" title="Webpack2 学习记录 — 第三章·开发/生产配置优化">
+                <i class="fa fa-chevron-left"></i> Webpack2 学习记录 — 第三章·开发/生产配置优化
+              </a>
             
           </div>
 
@@ -551,7 +555,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
