@@ -682,4 +682,4 @@ yarn add babel-core babel-eslint babel-loader babel-preset-env connect-history-a
 
 ![3](/images/webpack-guide-3/3.png)
 
-大功告成！
+大功告成！[源代码](https://github.com/jjandxa/webpack-demo)

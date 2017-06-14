@@ -178,4 +178,4 @@ $("#app").addClass("box")
 
 兼容第三方模块还有其他方式，通过 `imports-loader` 、 `exports-loader` 都是解决第三方依赖的方式，可以参考[官网相关资料](https://doc.webpack-china.org/guides/shimming/)。
 
-[源代码](https://github.com/jjandxa/webpack-demo)
+[源代码](https://github.com/jjandxa/webpack-demo/tree/webpack-hmr)
