@@ -143,6 +143,8 @@ typora-root-url: ../../source
 </dependency>
 ```
 
+> 注：依赖需要添加到 dependencies 节点中
+
 添加完依赖，需要对 **web.xml** 进行配置，整合 **spring & spring mvc** 时需要注意以下几点:
 
 1. Spring Context 配置
@@ -219,7 +221,7 @@ typora-root-url: ../../source
 
    <servlet-mapping>
      <servlet-name>springMVC</servlet-name>
-     <url-pattern>/*</url-pattern>
+     <url-pattern>/</url-pattern>
    </servlet-mapping>
    ```
 
@@ -241,7 +243,7 @@ typora-root-url: ../../source
 
    ```xml
    <!-- 扫描 Spring 组件 -->
-   <mvc:component-scan base-package="ml.jjandxa" ></mvc:component-scan>
+   <context:component-scan base-package="ml.jjandxa" />
 
    <!-- 视图解析器 -->
    <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver" >
@@ -260,7 +262,7 @@ typora-root-url: ../../source
 
    ```xml
    <!-- 开启注解 -->
-   <mvc:annotation-config></mvc:annotation-config>
+   <context:annotation-config/>
    ```
 
    > 以上配置设置了 Spring 扫描 ml.jjandxa 包下的所有组件，并且开始注解配置。最后设置了 Srping MVC 的视图解析器。
