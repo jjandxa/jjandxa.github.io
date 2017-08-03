@@ -10,26 +10,31 @@ NexT.utils = NexT.$u = {
       .not('.group-picture img, .post-gallery img')
       .each(function () {
         var $image = $(this);
-        var imageTitle = $image.parents('article').find('.post-title-link').text();
-        if (!imageTitle) {
-          imageTitle = $image.parents('article').find('.post-title').text();
-        }
-        imageTitle.replace('/(^\s*)|(\s*$)/g', '');
-        
+        var imageTitle = $image.attr('title');
         var $imageWrapLink = $image.parent('a');
 
         if ($imageWrapLink.size() < 1) {
-          $imageWrapLink = $image.wrap('<a style="outline: none;" data-fancybox="' + 
-          imageTitle + '" data-type="image" href="' + this.getAttribute('src')  + '"></a>').parent('a');
+	        var imageLink = ($image.attr('data-original')) ? this.getAttribute('data-original') : this.getAttribute('src');
+          $imageWrapLink = $image.wrap('<a href="' + imageLink + '"></a>').parent('a');
         }
 
+        $imageWrapLink.addClass('fancybox fancybox.image');
+        $imageWrapLink.attr('rel', 'group');
+
         if (imageTitle) {
-          $imageWrapLink.attr('data-caption', imageTitle);
+          $imageWrapLink.append('<p class="image-caption">' + imageTitle + '</p>');
+
+          //make sure img title tag will show correctly in fancybox
+          $imageWrapLink.attr('title', imageTitle);
         }
       });
 
-    $('[data-fancybox]').fancybox({
-      closeClickOutside: true
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
     });
   },
 
@@ -39,6 +44,42 @@ NexT.utils = NexT.$u = {
       effect: 'fadeIn',
       threshold : 0
     });
+  },
+
+  /**
+   * Tabs tag listener (without twitter bootstrap).
+   */
+  registerTabsTag: function () {
+    var tNav = '.tabs ul.nav-tabs ';
+
+    // Binding `nav-tabs` & `tab-content` by real time permalink changing.
+    $(function() {
+      $(window).bind('hashchange', function() {
+        var tHash = location.hash;
+        if (tHash !== '') {
+          $(tNav + 'li:has(a[href="' + tHash + '"])').addClass('active').siblings().removeClass('active');
+          $(tHash).addClass('active').siblings().removeClass('active');
+        }
+      }).trigger('hashchange');
+    });
+
+    $(tNav + '.tab').on('click', function (href) {
+      href.preventDefault();
+      // Prevent selected tab to select again.
+      if(!$(this).hasClass('active')){
+
+        // Add & Remove active class on `nav-tabs` & `tab-content`.
+        $(this).addClass('active').siblings().removeClass('active');
+        var tActive = $(this).find('a').attr('href');
+        $(tActive).addClass('active').siblings().removeClass('active');
+
+        // Clear location hash in browser if #permalink exists.
+        if (location.hash !== '') {
+          history.pushState('', document.title, window.location.pathname + window.location.search);
+        }
+      }
+    });
+
   },
 
   registerESCKeyEvent: function () {
@@ -121,6 +162,8 @@ NexT.utils = NexT.$u = {
         wrap.style.marginBottom = '20px';
         wrap.style.width = '100%';
         wrap.style.paddingTop = videoRatio + '%';
+        // Fix for appear inside tabs tag.
+        (wrap.style.paddingTop === '') && (wrap.style.paddingTop = '50%');
 
         // Add the iframe inside our newly created <div>
         var iframeParent = iframe.parentNode;
@@ -160,7 +203,7 @@ NexT.utils = NexT.$u = {
   addActiveClassToMenuItem: function () {
     var path = window.location.pathname;
     path = path === '/' ? path : path.substring(0, path.length - 1);
-    $('.menu-item a[href="' + path + '"]').parent().addClass('menu-item-active');
+    $('.menu-item a[href^="' + path + '"]:first').parent().addClass('menu-item-active');
   },
 
   hasMobileUA: function () {
@@ -194,7 +237,7 @@ NexT.utils = NexT.$u = {
   },
 
   displaySidebar: function () {
-    if (!this.isDesktop() || this.isPisces()) {
+    if (!this.isDesktop() || this.isPisces() || this.isGemini()) {
       return;
     }
     $('.sidebar-toggle').trigger('click');
@@ -206,6 +249,10 @@ NexT.utils = NexT.$u = {
 
   isPisces: function () {
     return CONFIG.scheme === 'Pisces';
+  },
+
+  isGemini: function () {
+    return CONFIG.scheme === 'Gemini';
   },
 
   getScrollbarWidth: function () {
@@ -224,6 +271,6 @@ NexT.utils = NexT.$u = {
    * @returns {Boolean}
    */
   needAffix: function () {
-    return this.isPisces();
+    return this.isPisces() || this.isGemini();
   }
 };
