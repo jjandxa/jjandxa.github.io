@@ -101,6 +101,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/03/24/ssm-c1/index.html">
 <meta property="og:site_name" content="糖醋排骨没有虾">
 <meta property="og:description" content="前言　　大半年没有更新过博客，最近在水神的鼓动下又弄起了 Hexo ，想想还是写篇博客抒发下。 　　初入 Java Web 的童鞋第一个门槛就是创建一个 Web 应用程序，尽管可以使用 Servlet 编写，但那也显得太过“原始“了。为了优化应用架构、提高效率、代码可控，所以我们需要用到各种框架来辅助我们构建应用程序。目前我主要使用的便是 Spring MVC、Spring、Mybatis—简称">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/ssm/create-project-1.png">
 <meta property="og:image" content="http://yoursite.com/images/ssm/create-project-2.png">
 <meta property="og:image" content="http://yoursite.com/images/ssm/create-project-3.png">
@@ -454,7 +455,7 @@
 </ol>
 <h1 id="你好，Spring-MVC"><a href="#你好，Spring-MVC" class="headerlink" title="你好，Spring MVC"></a>你好，Spring MVC</h1><p><img src="/images/ssm/helloword-web.png" alt="helloword-web"></p>
 <p>　　以上就是整合 Spring MVC 的详尽步骤，启动项目检查是否能够正常启动！如果正常启动，代表上述配置并没有出什么错误，编写一个 Controller 验证 Spring MVC 是否正常工作。编写如下控制器：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> ml.jjandxa.controller;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by aixiaoai on 2017/3/24.</div><div class="line"> */</div><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloSpring</span> </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@ResponseBody</span></div><div class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/hello"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">hello</span><span class="params">()</span> </span>&#123;</div><div class="line">        Map&lt;String, Object&gt; result = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">        result.put(<span class="string">"data"</span>, <span class="string">"Hello World!"</span>);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> ml.jjandxa.controller;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Created by aixiaoai on 2017/3/24.</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloSpring</span> </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@ResponseBody</span></div><div class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/hello"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">hello</span><span class="params">()</span> </span>&#123;</div><div class="line">        Map&lt;String, Object&gt; result = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">        result.put(<span class="string">"data"</span>, <span class="string">"Hello World!"</span>);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>测试请求：</p>
 <p><img src="/images/ssm/test-controller.png" alt="test-controller"></p>
 <p>成功啦！^_^</p>
@@ -497,8 +498,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/24/github-pages-deploy-guide/" rel="next" title="Github Pages & Hexo 博客搭建教程">
-                <i class="fa fa-chevron-left"></i> Github Pages & Hexo 博客搭建教程
+              <a href="/2016/07/14/deploy-docker-gitlab/" rel="next" title="部署Docker Gitlab">
+                <i class="fa fa-chevron-left"></i> 部署Docker Gitlab
               </a>
             
           </div>
@@ -507,8 +508,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/07/14/deploy-docker-gitlab/" rel="prev" title="部署Docker Gitlab">
-                部署Docker Gitlab <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/24/github-pages-deploy-guide/" rel="prev" title="Github Pages & Hexo 博客搭建教程">
+                Github Pages & Hexo 博客搭建教程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
