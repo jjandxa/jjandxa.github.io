@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="后端,Docker," />
+  <meta name="keywords" content="Docker,后端," />
 
 
 
@@ -70,7 +70,7 @@
 
 
 <meta name="description" content="第一次听到 Docker 这个东西已经不记得是什么时候了。大概也就是两年前左右，那时对这些新兴技术也是觉得云里雾里。加上平时也没空去了解，所以也不知道是什么东西。直到去年第一次使用它时才慢慢明白是做什么用，相信有很多同学也和我一样，对 Docker 的概念十分模糊。这里就记录一下 Docker 的相关知识吧。">
-<meta name="keywords" content="后端,Docker">
+<meta name="keywords" content="Docker,后端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker 是个啥？">
 <meta property="og:url" content="http://yoursite.com/2017/09/20/docker-guide-1/index.html">
@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/images/docker-guide-1/12.png">
 <meta property="og:image" content="http://yoursite.com/images/docker-guide-1/13.png">
 <meta property="og:image" content="http://yoursite.com/images/docker-guide-1/14.png">
-<meta property="og:updated_time" content="2017-09-20T08:10:08.000Z">
+<meta property="og:updated_time" content="2017-09-20T08:25:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker 是个啥？">
 <meta name="twitter:description" content="第一次听到 Docker 这个东西已经不记得是什么时候了。大概也就是两年前左右，那时对这些新兴技术也是觉得云里雾里。加上平时也没空去了解，所以也不知道是什么东西。直到去年第一次使用它时才慢慢明白是做什么用，相信有很多同学也和我一样，对 Docker 的概念十分模糊。这里就记录一下 Docker 的相关知识吧。">
@@ -415,14 +415,16 @@
 </ol>
 </li>
 </ol>
-<h2 id="容器操作"><a href="#容器操作" class="headerlink" title="容器操作"></a>容器操作</h2><h3 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h3><p>　　这些都是最基本的操作，那么我们现在就开始来运行一个容器吧。这个容器基于 ubuntu 制作而成。运行<code>docker run ubuntu /bin/echo &quot;Hello World&quot;</code> ：<img src="/images/docker-guide-1/3.png" alt="3"></p>
+<h2 id="容器操作"><a href="#容器操作" class="headerlink" title="容器操作"></a>容器操作</h2><h3 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h3><p>　　这些都是最基本的操作，那么我们现在就开始来运行一个容器吧。这个容器基于 ubuntu 制作而成。运行<code>docker run ubuntu /bin/echo &quot;Hello World&quot;</code> ：</p>
+<p><img src="/images/docker-guide-1/3.png" alt="3"></p>
 <blockquote>
 <p>格式：docker run 参数 (容器id/容器名称/镜像名称) 命令</p>
 </blockquote>
 <p>这里我们运行了一个基于 ubuntu 镜像的容器，并且运行后执行了 <code>/bin/echo &quot;Hello World&quot;</code> 命令。这里需要说明的是，如果我们以一个本地不存在的镜像来运行容器时，docker 会到官方仓库搜索并 pull 这个镜像。看起来好像就是运行了一个程序一样，其实它是个系统。只是我们让他运行了一个命令后就自动结束了。</p>
 <h4 id="运行交互式容器"><a href="#运行交互式容器" class="headerlink" title="运行交互式容器"></a>运行交互式容器</h4><p>　　交互式容器是什么？上面是最普通的运行一个容器的命令，但是我们说了这个容器其实是个系统。那我们怎么去操作这个系统？这时就需要我们再运行时加上<code>-it</code>命令，以便我们能够对这个容器进行更多操作。运行 <code>docker run -it ubuntu /bin/bash</code> ：</p>
 <p><img src="/images/docker-guide-1/4.png" alt="4"></p>
-<p>看，是不是跟普通的 linux 系统一样？<img src="/images/docker-guide-1/5.png" alt="5"></p>
+<p>看，是不是跟普通的 linux 系统一样？</p>
+<p><img src="/images/docker-guide-1/5.png" alt="5"></p>
 <p>基本的 shell 命令都没问题，最后我们退出这个容器。现在是不是能理解为什么要把它比喻为虚拟机了吧？这个时候同学们又要问了，要是我运行的时候忘记加 <code>-it</code> 了怎么办？这个时候只需要重新运行这个容器就可以了 <code>docker run -it 容器id /bin/bash</code></p>
 <h3 id="查看容器"><a href="#查看容器" class="headerlink" title="查看容器"></a>查看容器</h3><p>　　<code>ps</code> 命令是用来查看容器状态的。运行<code>docker ps</code> 命令得到如下结果：</p>
 <p><img src="/images/docker-guide-1/6.png" alt="6"></p>
@@ -433,7 +435,8 @@
 </blockquote>
 <p>有两条记录，CONTAINET ID 代表容器的唯一id，如果觉得 ID不好记，我们可以为容器设置别名。在运行容器时加上 <code>--name 容器名称</code> 参数，例如： <code>docker run --name ubuntu</code></p>
 <h3 id="为什么容器执行完命令就会结束？"><a href="#为什么容器执行完命令就会结束？" class="headerlink" title="为什么容器执行完命令就会结束？"></a>为什么容器执行完命令就会结束？</h3><p>　　因为系统中没后台驻留的程序，所以命令执行完容器就自动结束了。如果容器中运行 Tomcat、Nginx 等等会驻留在后台的程序，那么容器就会一直处于<strong>运行中</strong>的状态。直到你手动关闭它。</p>
-<h3 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器"></a>停止容器</h3><p>　　明白了上面运行容器的操作后，相信这个命令对你而言就是小事一桩。我们先运行一个交互式容器 <code>docker run -it --name ubuntu ubuntu /bin/bash</code> 。然后把它放在一边，打开一个新的终端，运行 <code>docker ps</code> 就能看到正在运行中的容器了。<img src="/images/docker-guide-1/8.png" alt="8"></p>
+<h3 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器"></a>停止容器</h3><p>　　明白了上面运行容器的操作后，相信这个命令对你而言就是小事一桩。我们先运行一个交互式容器 <code>docker run -it --name ubuntu ubuntu /bin/bash</code> 。然后把它放在一边，打开一个新的终端，运行 <code>docker ps</code> 就能看到正在运行中的容器了。</p>
+<p><img src="/images/docker-guide-1/8.png" alt="8"></p>
 <p>现在我们看到容器id和容器名称了，运行 <code>docker stop (容器id/容器名称)</code> 就可以停止它了。</p>
 <p><img src="/images/docker-guide-1/9.png" alt="9"></p>
 <p>这个时候 <code>docker ps</code> 看不到该容器，但是 <code>docker ps -a</code> 还是可以看到。如果删除了容器就再也看不到了。</p>
@@ -442,7 +445,8 @@
 <h2 id="镜像操作"><a href="#镜像操作" class="headerlink" title="镜像操作"></a>镜像操作</h2><p>​    这里稍微讲解镜像的拉取，提交，删除操作。除这些外一些高级操作现在暂时不会涉及。</p>
 <h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><p>​    上面说到在运行容器时，如果对应的镜像没有下载，则会自动先把镜像下载下来然后运行容器。有时候你想自己预先下载镜像，这时候就需要用到 <code>pull</code> 命令。在 <a href="https://hub.docker.com/search/" target="_blank" rel="external">Docker Hub</a> 可以搜索到现在官方仓库已有的镜像。例如我们搜索 java 的镜像：</p>
 <p><img src="/images/docker-guide-1/12.png" alt="12"></p>
-<p>点击第一个进去，查看tag 能看到很多不同的镜像。<img src="/images/docker-guide-1/13.png" alt="13"></p>
+<p>点击第一个进去，查看tag 能看到很多不同的镜像。</p>
+<p><img src="/images/docker-guide-1/13.png" alt="13"></p>
 <p>这时我们可以选择一个然后 <code>pull</code> 到本地：</p>
 <p><img src="/images/docker-guide-1/14.png" alt="14"></p>
 <h3 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h3><p>　　当需要删除镜像时只需要执行 <code>docker rmi 镜像名称</code> 即可。需要注意的是，如果该镜像被某个容器使用了，则需要删除容器后才能删除镜像。</p>
@@ -464,9 +468,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/后端/" rel="tag"># 后端</a>
-          
             <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+            <a href="/tags/后端/" rel="tag"># 后端</a>
           
         </div>
       
