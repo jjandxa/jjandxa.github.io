@@ -37,36 +37,11 @@
 
 
 
+
   
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
 
 
 
@@ -113,10 +88,11 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
+    version: '5.1.2',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
-    motion: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -149,12 +125,6 @@
 
 
 
-
-
-
-
-
-
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -164,7 +134,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -219,16 +189,6 @@
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
 
       
     </ul>
@@ -272,7 +232,7 @@
                 目前共计 20 个标签
             </div>
             <div class="tag-cloud-tags">
-              <a href="/tags/Docker/" style="font-size: 12px; color: #ccc">Docker</a> <a href="/tags/Git/" style="font-size: 18px; color: #8e8e8e">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12px; color: #ccc">Github Pages</a> <a href="/tags/Gitlab/" style="font-size: 12px; color: #ccc">Gitlab</a> <a href="/tags/Hexo/" style="font-size: 12px; color: #ccc">Hexo</a> <a href="/tags/Java/" style="font-size: 18px; color: #8e8e8e">Java</a> <a href="/tags/JavaScript/" style="font-size: 30px; color: #111">JavaScript</a> <a href="/tags/Mybatis/" style="font-size: 18px; color: #8e8e8e">Mybatis</a> <a href="/tags/NodeJS/" style="font-size: 24px; color: #4f4f4f">NodeJS</a> <a href="/tags/OS-X/" style="font-size: 12px; color: #ccc">OS X</a> <a href="/tags/RequireJS/" style="font-size: 12px; color: #ccc">RequireJS</a> <a href="/tags/Spring/" style="font-size: 18px; color: #8e8e8e">Spring</a> <a href="/tags/Spring-MVC/" style="font-size: 18px; color: #8e8e8e">Spring MVC</a> <a href="/tags/Webpack/" style="font-size: 24px; color: #4f4f4f">Webpack</a> <a href="/tags/其他/" style="font-size: 12px; color: #ccc">其他</a> <a href="/tags/前端/" style="font-size: 30px; color: #111">前端</a> <a href="/tags/后端/" style="font-size: 18px; color: #8e8e8e">后端</a> <a href="/tags/家用机/" style="font-size: 18px; color: #8e8e8e">家用机</a> <a href="/tags/掌机/" style="font-size: 18px; color: #8e8e8e">掌机</a> <a href="/tags/游戏/" style="font-size: 18px; color: #8e8e8e">游戏</a>
+              <a href="/tags/Docker/" style="font-size: 18px; color: #8e8e8e">Docker</a> <a href="/tags/Git/" style="font-size: 18px; color: #8e8e8e">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12px; color: #ccc">Github Pages</a> <a href="/tags/Gitlab/" style="font-size: 12px; color: #ccc">Gitlab</a> <a href="/tags/Hexo/" style="font-size: 12px; color: #ccc">Hexo</a> <a href="/tags/Java/" style="font-size: 18px; color: #8e8e8e">Java</a> <a href="/tags/JavaScript/" style="font-size: 30px; color: #111">JavaScript</a> <a href="/tags/Mybatis/" style="font-size: 18px; color: #8e8e8e">Mybatis</a> <a href="/tags/NodeJS/" style="font-size: 24px; color: #4f4f4f">NodeJS</a> <a href="/tags/OS-X/" style="font-size: 12px; color: #ccc">OS X</a> <a href="/tags/RequireJS/" style="font-size: 12px; color: #ccc">RequireJS</a> <a href="/tags/Spring/" style="font-size: 18px; color: #8e8e8e">Spring</a> <a href="/tags/Spring-MVC/" style="font-size: 18px; color: #8e8e8e">Spring MVC</a> <a href="/tags/Webpack/" style="font-size: 24px; color: #4f4f4f">Webpack</a> <a href="/tags/其他/" style="font-size: 12px; color: #ccc">其他</a> <a href="/tags/前端/" style="font-size: 30px; color: #111">前端</a> <a href="/tags/后端/" style="font-size: 24px; color: #4f4f4f">后端</a> <a href="/tags/家用机/" style="font-size: 18px; color: #8e8e8e">家用机</a> <a href="/tags/掌机/" style="font-size: 18px; color: #8e8e8e">掌机</a> <a href="/tags/游戏/" style="font-size: 18px; color: #8e8e8e">游戏</a>
             </div>
           </div>
         
@@ -315,20 +275,23 @@
 
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.jpg"
-               alt="jjandxa" />
-          <p class="site-author-name" itemprop="name">jjandxa</p>
-           
-              <p class="site-description motion-element" itemprop="description">我去你留，两个秋</p>
           
+            <img class="site-author-image" itemprop="image"
+              src="/images/avatar.jpg"
+              alt="jjandxa" />
+          
+            <p class="site-author-name" itemprop="name">jjandxa</p>
+            <p class="site-description motion-element" itemprop="description">我去你留，两个秋</p>
         </div>
+
         <nav class="site-state motion-element">
 
           
             <div class="site-state-item site-state-posts">
+            
               <a href="/archives/">
-                <span class="site-state-item-count">13</span>
+            
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -364,47 +327,27 @@
           
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/jjandxa" target="_blank" title="微博">
+                <a href="http://weibo.com/jjandxa" target="_blank" title="Weibo">
                   
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                    
-                      微博
-                    
-                </a>
+                    <i class="fa fa-fw fa-globe"></i>Weibo</a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://github.com/jjandxa" target="_blank" title="Github">
+                <a href="https://github.com/jjandxa" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                    
-                      Github
-                    
-                </a>
+                    <i class="fa fa-fw fa-globe"></i>GitHub</a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="https://twitter.com/504932812" target="_blank" title="Twitter">
                   
-                    <i class="fa fa-fw fa-twitter"></i>
-                  
-                    
-                      Twitter
-                    
-                </a>
+                    <i class="fa fa-fw fa-globe"></i>Twitter</a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="https://www.facebook.com/aizi.tang" target="_blank" title="Facebook">
                   
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                    
-                      Facebook
-                    
-                </a>
+                    <i class="fa fa-fw fa-globe"></i>Facebook</a>
               </span>
             
           
@@ -461,22 +404,25 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">jjandxa</span>
+
+  
 </div>
 
 
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.2</div>
 
 
         
+
+
+
+
+
+
 
         
       </div>
@@ -558,9 +504,9 @@
 
 
 
-  
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
 
   
 
@@ -592,6 +538,8 @@
 
 
   
+
+
 
 
 
